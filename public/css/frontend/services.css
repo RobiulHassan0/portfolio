@@ -1,0 +1,361 @@
+/* ===== Services ===== */
+
+
+/* ── 2×2 Grid ── */
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap);
+    width: 100%;
+    /* max-width: 1200px; */
+    margin: 0 auto;
+}
+
+@media(max-width: 600px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Card shell ── */
+.service-card {
+    --ac: var(--primary);
+    --ar: 59, 130, 246;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.38s;
+}
+
+.service-card.backend {
+    --ac: var(--emerald);
+    --ar: 16, 185, 129;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(var(--ar), 0.32);
+    box-shadow: 0 24px 56px -18px rgba(var(--ar), 0.22);
+}
+
+/* Diagonal radius */
+.service-card:nth-child(1) {
+    border-radius: var(--Rbig) var(--Rsm) var(--Rsm) var(--Rsm);
+}
+
+.service-card:nth-child(2) {
+    border-radius: var(--Rsm) var(--Rbig) var(--Rsm) var(--Rsm);
+}
+
+.service-card:nth-child(3) {
+    border-radius: var(--Rsm) var(--Rsm) var(--Rsm) var(--Rbig);
+}
+
+.service-card:nth-child(4) {
+    border-radius: var(--Rsm) var(--Rsm) var(--Rbig) var(--Rsm);
+}
+
+@media(max-width:600px) {
+    .service-card:nth-child(1) {
+        border-radius: var(--Rbig) var(--Rbig) var(--Rsm) var(--Rsm);
+    }
+
+    .service-card:nth-child(2) {
+        border-radius: var(--Rsm);
+    }
+
+    .service-card:nth-child(3) {
+        border-radius: var(--Rsm);
+    }
+
+    .service-card:nth-child(4) {
+        border-radius: var(--Rsm) var(--Rsm) var(--Rbig) var(--Rbig);
+    }
+}
+
+/* bg texture */
+.card-bg {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to right, rgba(229, 231, 235, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(229, 231, 235, 0.03) 1px, transparent 1px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse at top right, black 0%, transparent 65%);
+    mask-image: radial-gradient(ellipse at top right, black 0%, transparent 65%);
+}
+
+.card-glow {
+    pointer-events: none;
+    position: absolute;
+    top: -4rem;
+    right: -4rem;
+    width: 14rem;
+    height: 14rem;
+    border-radius: 9999px;
+    filter: blur(55px);
+    opacity: 0.25;
+    background: radial-gradient(circle, rgba(var(--ar), .55), transparent 70%);
+    transition: opacity 0.35s;
+}
+
+.service-card:hover .card-glow {
+    opacity: 0.55;
+}
+
+/* ── Card header ── */
+.card-header {
+    position: relative;
+    padding: 1.5rem 1.6rem 1.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.card-icon {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(var(--ar), 0.18), rgba(var(--ar), 0.06));
+    border: 1px solid rgba(var(--ar), 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ac);
+    font-size: 21px;
+    box-shadow: 0 6px 20px -8px rgba(var(--ar), 0.4);
+    transition: transform 0.35s;
+}
+.card-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.service-card:hover .card-icon {
+    transform: rotate(-6deg) scale(1.08);
+}
+
+.card-intro {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 0.45rem;
+}
+
+.card-cat,
+.card-num,
+.sec-label,
+.pill,
+.feat {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.card-cat {
+    font-size: 0.57rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ac);
+    background: rgba(var(--ar), 0.1);
+    border: 1px solid rgba(var(--ar), 0.25);
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.card-num {
+    /* font-size: 2rem; 
+    color: rgba(255, 255, 255, 0.18);
+    letter-spacing: 0.06em; */ 
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 30px;
+    font-weight: 700;
+    color: rgba(59, 130, 246, .12);
+    letter-spacing: -.04em;
+    line-height: 1;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--foreground);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
+}
+
+.card-desc {
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+    line-height: 1.65;
+}
+
+/* ══════════════════════════════════════
+   PC layout: 3 columns side by side
+   ══════════════════════════════════════ */
+.card-sections {
+    position: relative;
+    padding: 1.2rem 1.6rem 1.6rem;
+    flex: 1;
+
+    /* PC: 3 equal columns */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+}
+
+/* vertical dividers between columns on PC */
+.sec:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    padding-right: 1.1rem;
+}
+
+.sec:not(:first-child) {
+    padding-left: 1.1rem;
+}
+
+/* ══════════════════════════════════════
+   Mobile layout: 3 rows stacked
+   ══════════════════════════════════════ */
+@media(max-width:600px) {
+    .card-sections {
+        grid-template-columns: 1fr;
+        /* single column = rows */
+        gap: 1rem;
+        padding: 1.2rem 1.4rem 1.5rem;
+    }
+
+    .sec:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-right: 0;
+        padding-bottom: 1rem;
+    }
+
+    .sec:not(:first-child) {
+        padding-left: 0;
+    }
+}
+
+/* ── Section label ── */
+.sec-label {
+    font-size: 0.56rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ac);
+    opacity: 0.75;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 0.65rem;
+}
+
+.sec-label-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--ac);
+    flex-shrink: 0;
+}
+
+/* line after label — only on mobile (in column layout it doesn't look great) */
+@media(max-width:600px) {
+    .sec-label::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(var(--ar), 0.14);
+    }
+}
+
+/* ── Stack & Setup: pills ──
+   PC  → vertical column (one per row)
+   Mobile → horizontal wrap
+*/
+.pill-col {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.pill {
+    font-size: 0.65rem;
+    padding: 4px 9px;
+    border-radius: 6px;
+    color: var(--muted-foreground);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: inline-block;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+
+.service-card:hover .pill {
+    color: rgba(229, 231, 235, 0.8);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Mobile: pills wrap horizontally */
+@media(max-width:600px) {
+    .pill-col {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+}
+
+/* ── Features: checklist ── */
+.feat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.feat {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.69rem;
+    color: var(--muted-foreground);
+    padding: 5px 0;
+    border-top: 1px dashed rgba(255, 255, 255, 0.05);
+}
+
+.feat:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+.feat-box {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: rgba(var(--ar), 0.12);
+    border: 1px solid rgba(var(--ar), 0.38);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feat-box svg {
+    width: 8px;
+    height: 8px;
+    stroke: var(--ac);
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}

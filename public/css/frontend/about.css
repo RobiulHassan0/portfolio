@@ -1,0 +1,113 @@
+/* ===== About ===== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .about-grid { grid-template-columns: 3fr 2fr; gap: 2.5rem; }
+}
+
+.about-copy p {
+  color: var(--muted-foreground);
+  line-height: 1.75;
+  margin: 0 0 1rem;
+}
+.about-copy strong { color: var(--foreground); font-weight: 500; }
+
+.about-checks {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+@media (min-width: 640px) { .about-checks { grid-template-columns: 1fr 1fr; } }
+.about-checks li {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: rgba(17,24,39,0.4);
+  font-size: 0.875rem;
+  color: rgba(229,231,235,0.9);
+}
+.about-checks li svg { width: 16px; height: 16px; color: var(--emerald); flex-shrink: 0; margin-top: 2px; }
+
+.about-meta {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+@media (min-width: 640px) { .about-meta { grid-template-columns: repeat(3, 1fr); } }
+.about-meta .item {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.about-meta .label {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+.about-meta .label svg { width: 14px; height: 14px; color: var(--primary); }
+.about-meta .value {
+  margin-top: 0.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--foreground);
+}
+
+.about-portrait { position: relative; }
+.about-portrait .glow {
+  position: absolute;
+  inset: -0.25rem;
+  border-radius: 1.25rem;
+  opacity: 0.6;
+  filter: blur(20px);
+  background: linear-gradient(135deg, rgba(59,130,246,.4), rgba(16,185,129,.2), transparent);
+}
+.about-portrait .frame {
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: clamp(22rem, 50vw, 32rem);
+  object-fit: cover;
+  object-position: center;
+}
+.about-portrait .grid-overlay {
+  position: absolute; inset: 0; opacity: 0.3; pointer-events: none;
+}
+.about-portrait .footer {
+  position: absolute; inset-inline: 0; bottom: 0; padding: 1rem;
+  background: linear-gradient(to top, rgba(15,23,42,.95), rgba(15,23,42,.6), transparent);
+}
+.about-portrait .status {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+}
+.about-portrait .status .ping {
+  position: relative;
+  display: inline-flex; width: 0.5rem; height: 0.5rem;
+}
+.about-portrait .status .ping::before {
+  content: ""; position: absolute; inset: 0; border-radius: 9999px;
+  background: var(--emerald); opacity: 0.75; animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite;
+}
+.about-portrait .status .ping::after {
+  content: ""; position: relative; display: inline-block;
+  width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: var(--emerald);
+}
+@keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }

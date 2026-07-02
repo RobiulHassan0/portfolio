@@ -1,0 +1,100 @@
+/* ===== Navigation ===== */
+.site-nav {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(15, 23, 42, 0.7);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--foreground); }
+.nav-links a .num { color: var(--primary); margin-right: 0.25rem; }
+.nav-cta {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(59,130,246,0.4);
+  color: var(--primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: rgba(59,130,246,0.1); }
+
+/* Mobile menu button */
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: rgba(17,24,39,0.5);
+  color: var(--foreground);
+  cursor: pointer;
+}
+.nav-toggle svg { width: 20px; height: 20px; }
+
+/* Mobile dropdown */
+.mobile-menu {
+  display: none;
+  border-top: 1px solid var(--border);
+  background: rgba(15,23,42,0.95);
+  backdrop-filter: blur(12px);
+}
+.mobile-menu.open { display: block; }
+.mobile-menu .inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.mobile-menu a {
+  padding: 0.75rem 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: background 0.15s, color 0.15s;
+}
+.mobile-menu a:hover { background: rgba(59,130,246,0.08); color: var(--foreground); }
+.mobile-menu a .num { color: var(--primary); margin-right: 0.5rem; }
+
+@media (min-width: 768px) {
+  .nav-links { display: flex; }
+  .nav-cta { display: inline-flex; }
+  .nav-toggle { display: none; }
+  .mobile-menu { display: none !important; }
+}
