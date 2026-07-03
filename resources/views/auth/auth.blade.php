@@ -47,8 +47,27 @@
         };
     </script>
 
+    <style>
+        body {
+            display: none !important;
+        }
+    </style>
+
     <link rel="stylesheet" href="{{ asset('css/frontend/base.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}" />
+
+
+    <script>
+        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+        if (token) {
+            window.location.href = '/dashboard'; 
+        } else {
+            window.addEventListener('DOMContentLoaded', () => {
+                document.body.style.setProperty('display', 'block', 'important');
+            });
+        }
+    </script>
+ 
 
 </head>
 

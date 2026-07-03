@@ -20,6 +20,26 @@
     <link rel="stylesheet" href="{{ asset('css/admin/service.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/admin/skills.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/admin/toast.css') }}" />
+    
+    <style>
+    
+    body { display: none !important; }
+    </style>
+
+
+    <script>
+        
+        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+        if (!token) {
+            window.location.href = '/admin/login';
+        } else {
+            document.documentElement.style.display = 'block'; 
+            window.addEventListener('DOMContentLoaded', () => {
+                document.body.style.setProperty('display', 'block', 'important');
+            });
+        }
+    </script>
+
 </head>
 
 <body class="bg-background text-foreground">
@@ -49,12 +69,12 @@
     <script src="{{ asset('js/admin/icons.js') }}"></script>
     <script src="{{ asset('js/admin/modal.js') }}"></script>
 
-    <script src="{{ asset('js/admin/sections/overview.js') }}"></script>
-    <script src="{{ asset('js/admin/sections/settings.js') }}"></script>
+    <script src="{{ asset('js/admin/sections/dashboard.js') }}"></script>
     <script src="{{ asset('js/admin/sections/projects.js') }}"></script>
     <script src="{{ asset('js/admin/sections/services.js') }}"></script>
     <script src="{{ asset('js/admin/sections/skills.js') }}"></script>
-
+    <script src="{{ asset('js/admin/sections/settings.js') }}"></script>
+    
     <script src="{{ asset('js/admin/app.js') }}"></script>
 
     @stack('scripts')

@@ -66,7 +66,7 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            Auth::login($user, $request->has('remember'));
+            // Auth::login($user, $request->has('remember'));
 
             $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -93,5 +93,22 @@ class AuthController extends Controller
                 'errors' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function logout(Request $request){
+        try{
+            $request->user()->currentAccessToken()->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Logged out successful!',
+            ], 200);
+        }catch(\Throwable $e){
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong during logout.',
+                'errors' => $e->getMessage()                
+            ], 500);
+        }
+
     }
 }

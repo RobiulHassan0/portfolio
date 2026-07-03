@@ -93,7 +93,7 @@
 
                     <div class="field">
                         <label>Stack (Comma separated)</label>
-                        <input name="stack" value="{{ $stack ?? '' }}" placeholder="e.g. Laravel, PHP, JS, MySQL" />
+                        <input name="stack" value="{{ $userInfo?->stack ? implode(', ', $userInfo->stack ?? []) : '' }}" placeholder="e.g. Laravel, PHP, JS, MySQL" />
                     </div>
                 </div>
 

@@ -8,26 +8,39 @@
   });
 
   const submitBtn = document.getElementById('login-submit');
-  if (submitBtn) submitBtn.insertAdjacentHTML('beforeend', window.Icons.arrowRight);
+  // if (submitBtn) submitBtn.insertAdjacentHTML('beforeend', window.Icons.arrowRight);
+  if (submitBtn && window.Icons && window.Icons.arrowRight) {
+    submitBtn.insertAdjacentHTML('beforeend', window.Icons.arrowRight);
+  }
 
   const form = document.getElementById('login-form');
   const status = document.getElementById('login-status');
   if (!form) return;
+
+  // const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+  // if (token) {
+  //     window.location.href = '/dashboard'; 
+  //     return; 
+  // }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     status.textContent = '';
     status.className = 'login-status';
 
-    const data = Object.fromEntries(new FormData(form).entries());
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
     const email = (data.email || '').trim();
     const password = (data.password || '').trim();
+
+    const rememberMe = formData.has('remember');
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
        status.textContent = '✗ Enter a valid email address.';
       status.className = 'login-status error';
       return;
     }
+
     if (password.length < 5) {
       status.textContent = '✗ Password must be at least 5 characters.';
       status.className = 'login-status error';
@@ -40,7 +53,7 @@
     if(submitBtn) submitBtn.disabled = true;
 
     try{
-      const response = await fetch('/admin/login', {
+      const response = await fetch('/api/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,8 +68,13 @@
         status.textContent = '✓ Login successful! Redirecting…';
         status.className = 'login-status success';
 
-        localStorage.setItem('auth_token', responseData.token);
-        localStorage.setItem('user_data', JSON.stringify(responseData.user_data));
+        if(rememberMe){
+          localStorage.setItem('auth_token', responseData.token);
+          localStorage.setItem('user_data', JSON.stringify(responseData.user_data));
+        }else{
+          sessionStorage.setItem('auth_token', responseData.token);
+          sessionStorage.setItem('user_data', JSON.stringify(responseData.user_data));
+        }
 
         setTimeout(() => { window.location.href = '/dashboard'; }, 1000);
 
@@ -71,9 +89,15 @@
       }
     }catch(error){
       console.error('API Error:', error);
+
       status.textContent = '✗ Something went wrong. Please try again later.';
+
       status.className = 'login-status error';
+
       if(submitBtn) submitBtn.disabled = false;
     }
+
   });
+
+
 })();

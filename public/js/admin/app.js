@@ -22,9 +22,9 @@
     function showSection(name) {
         if (!titleMap[name]) name = 'overview';
         
-        if (name === 'overview') {
-            loadOverViewStats?.();
-        }
+        // if (name === 'overview') {
+        //     loadOverViewStats?.();
+        // }
 
         if (name === 'settings') {
             loadContact?.();
@@ -85,13 +85,6 @@
         sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
     });
 
-    // ---------- Logout demo ----------
-    document.getElementById('logoutBtn')?.addEventListener('click', () => {
-        // Replace with a real <form method="POST" action="{{ route('logout') }}">
-        // in your Blade template.
-        Toast.show('Logout — wire to Laravel route', 'info');
-    });
-
     // ---------- Range slider live value ----------
     document.querySelectorAll('input[type=range][data-range]').forEach(input => {
         const out = input.parentElement.querySelector('.val');
@@ -130,12 +123,6 @@ render();
         
     });
 
-    document.querySelectorAll('[data-demo-toast]').forEach(b => {
-        b.addEventListener('click', () => {
-            Toast.show(b.dataset.demoToast, b.dataset.demoType || 'info');
-        });
-    });
-
     // ---------- Initial section from URL hash ----------
     const initial = (location.hash || '#overview').slice(1);
     showSection(initial);
@@ -149,3 +136,4 @@ window.esc = function(str) {
         tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
     );
 }
+
