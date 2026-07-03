@@ -69,7 +69,7 @@
     <script src="{{ asset('js/admin/icons.js') }}"></script>
     <script src="{{ asset('js/admin/modal.js') }}"></script>
 
-    <script src="{{ asset('js/admin/sections/dashboard.js') }}"></script>
+    <script src="{{ asset('js/admin/sections/logout.js') }}"></script>
     <script src="{{ asset('js/admin/sections/projects.js') }}"></script>
     <script src="{{ asset('js/admin/sections/services.js') }}"></script>
     <script src="{{ asset('js/admin/sections/skills.js') }}"></script>

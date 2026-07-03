@@ -15,7 +15,6 @@ Route::get("/admin/login", [AuthController::class, 'showLoginPage'])->name('logi
 Route::post('/admin/login', [V1AuthController::class, 'login']);
 
 
-Route::middleware('auth')->group( function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboardPage'])->name('dashboard'); 
 
-});
+Route::get('/dashboard', [DashboardController::class, 'dashboardPage'])->name('dashboard'); 
+
